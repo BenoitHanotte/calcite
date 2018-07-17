@@ -442,10 +442,14 @@ public abstract class SqlImplementor {
 
       case FIELD_ACCESS:
         RexFieldAccess access = (RexFieldAccess) rex;
-        final RexCorrelVariable variable =
-            (RexCorrelVariable) access.getReferenceExpr();
-        final Context aliasContext = correlTableMap.get(variable.id);
-        return aliasContext.field(access.getField().getIndex());
+        switch (access.getReferenceExpr().getKind()) {
+        case CORREL_VARIABLE:
+          final RexCorrelVariable variable = (RexCorrelVariable) access.getReferenceExpr();
+          final Context aliasContext = correlTableMap.get(variable.id);
+          return aliasContext.field(access.getField().getIndex());
+        default:
+          return field(access.getField().getIndex());
+        }
 
       case PATTERN_INPUT_REF:
         final RexPatternFieldRef ref = (RexPatternFieldRef) rex;
