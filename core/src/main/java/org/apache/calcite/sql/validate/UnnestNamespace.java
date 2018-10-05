@@ -25,7 +25,7 @@ import org.apache.calcite.sql.SqlUnnestOperator;
 /**
  * Namespace for UNNEST.
  */
-class UnnestNamespace extends AbstractNamespace {
+public class UnnestNamespace extends AbstractNamespace {
   //~ Instance fields --------------------------------------------------------
 
   private final SqlCall unnest;

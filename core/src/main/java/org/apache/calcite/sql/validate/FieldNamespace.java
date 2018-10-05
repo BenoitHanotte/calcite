@@ -26,7 +26,7 @@ import org.apache.calcite.sql.SqlNode;
  * record or multiset type - but this class exists to make fields behave
  * similarly to other records for purposes of name resolution.
  */
-class FieldNamespace extends AbstractNamespace {
+public class FieldNamespace extends AbstractNamespace {
   //~ Constructors -----------------------------------------------------------
 
   /**

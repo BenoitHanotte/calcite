@@ -24,7 +24,7 @@ import org.apache.calcite.sql.SqlNode;
  *
  * @see ParameterScope
  */
-class ParameterNamespace extends AbstractNamespace {
+public class ParameterNamespace extends AbstractNamespace {
   //~ Instance fields --------------------------------------------------------
 
   private final RelDataType type;
