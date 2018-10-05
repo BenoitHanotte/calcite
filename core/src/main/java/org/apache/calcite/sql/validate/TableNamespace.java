@@ -38,7 +38,7 @@ import java.util.Objects;
 import static org.apache.calcite.util.Static.RESOURCE;
 
 /** Namespace based on a table from the catalog. */
-class TableNamespace extends AbstractNamespace {
+public class TableNamespace extends AbstractNamespace {
   private final SqlValidatorTable table;
   public final ImmutableList<RelDataTypeField> extendedFields;
 

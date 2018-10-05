@@ -24,7 +24,7 @@ import org.apache.calcite.sql.SqlNode;
 /**
  * Namespace representing the row type produced by joining two relations.
  */
-class JoinNamespace extends AbstractNamespace {
+public class JoinNamespace extends AbstractNamespace {
   //~ Instance fields --------------------------------------------------------
 
   private final SqlJoin join;

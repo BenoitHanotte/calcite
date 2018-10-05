@@ -25,7 +25,7 @@ import org.apache.calcite.sql.SqlWithItem;
 import org.apache.calcite.util.Pair;
 
 /** Very similar to {@link AliasNamespace}. */
-class WithItemNamespace extends AbstractNamespace {
+public class WithItemNamespace extends AbstractNamespace {
   private final SqlWithItem withItem;
 
   WithItemNamespace(SqlValidatorImpl validator, SqlWithItem withItem,

@@ -30,7 +30,7 @@ import java.util.Objects;
  *
  * <p>The visible names are tables and sub-schemas.
  */
-class SchemaNamespace extends AbstractNamespace {
+public class SchemaNamespace extends AbstractNamespace {
   /** The path of this schema. */
   private final ImmutableList<String> names;
 
