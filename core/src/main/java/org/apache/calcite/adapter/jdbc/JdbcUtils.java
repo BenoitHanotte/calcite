@@ -52,7 +52,7 @@ import javax.sql.DataSource;
 /**
  * Utilities for the JDBC provider.
  */
-final class JdbcUtils {
+public final class JdbcUtils {
   private JdbcUtils() {
     throw new AssertionError("no instances!");
   }
@@ -110,7 +110,7 @@ final class JdbcUtils {
   /** Builder that calls {@link ResultSet#getObject(int)} for every column,
    * or {@code getXxx} if the result type is a primitive {@code xxx},
    * and returns an array of objects for each row. */
-  static class ObjectArrayRowBuilder implements Function0<Object[]> {
+  public static class ObjectArrayRowBuilder implements Function0<Object[]> {
     private final ResultSet resultSet;
     private final int columnCount;
     private final ColumnMetaData.Rep[] reps;

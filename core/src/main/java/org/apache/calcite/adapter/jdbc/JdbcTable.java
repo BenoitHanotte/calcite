@@ -81,7 +81,7 @@ public class JdbcTable extends AbstractQueryableTable
   private final String jdbcTableName;
   private final Schema.TableType jdbcTableType;
 
-  JdbcTable(JdbcSchema jdbcSchema, String jdbcCatalogName,
+  public JdbcTable(JdbcSchema jdbcSchema, String jdbcCatalogName,
       String jdbcSchemaName, String tableName, Schema.TableType jdbcTableType) {
     super(Object[].class);
     this.jdbcSchema = jdbcSchema;
