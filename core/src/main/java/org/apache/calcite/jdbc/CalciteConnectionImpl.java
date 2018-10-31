@@ -88,7 +88,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * <p>Abstract to allow newer versions of JDBC to add methods.</p>
  */
-abstract class CalciteConnectionImpl
+public abstract class CalciteConnectionImpl
     extends AvaticaConnection
     implements CalciteConnection, QueryProvider {
   public final JavaTypeFactory typeFactory;

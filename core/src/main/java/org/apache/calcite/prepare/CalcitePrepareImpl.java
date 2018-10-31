@@ -216,7 +216,7 @@ public class CalcitePrepareImpl implements CalcitePrepare {
           EnumerableRules.ENUMERABLE_TABLE_SCAN_RULE,
           EnumerableRules.ENUMERABLE_TABLE_FUNCTION_SCAN_RULE);
 
-  private static final List<RelOptRule> DEFAULT_RULES =
+  protected static final List<RelOptRule> DEFAULT_RULES =
       ImmutableList.of(
           AggregateStarTableRule.INSTANCE,
           AggregateStarTableRule.INSTANCE2,
@@ -241,7 +241,7 @@ public class CalcitePrepareImpl implements CalcitePrepare {
           SortRemoveConstantKeysRule.INSTANCE,
           SortUnionTransposeRule.INSTANCE);
 
-  private static final List<RelOptRule> CONSTANT_REDUCTION_RULES =
+  protected static final List<RelOptRule> CONSTANT_REDUCTION_RULES =
       ImmutableList.of(
           ReduceExpressionsRule.PROJECT_INSTANCE,
           ReduceExpressionsRule.FILTER_INSTANCE,
@@ -678,7 +678,7 @@ public class CalcitePrepareImpl implements CalcitePrepare {
    *
    * @param kind Kind of statement
    */
-  private Meta.StatementType getStatementType(SqlKind kind) {
+  protected Meta.StatementType getStatementType(SqlKind kind) {
     switch (kind) {
     case INSERT:
     case DELETE:
@@ -695,7 +695,7 @@ public class CalcitePrepareImpl implements CalcitePrepare {
    *
    * @param preparedResult Prepare result
    */
-  private Meta.StatementType getStatementType(Prepare.PreparedResult preparedResult) {
+  protected Meta.StatementType getStatementType(Prepare.PreparedResult preparedResult) {
     if (preparedResult.isDml()) {
       return Meta.StatementType.IS_DML;
     } else {
@@ -839,7 +839,7 @@ public class CalcitePrepareImpl implements CalcitePrepare {
         statementType);
   }
 
-  private SqlValidator createSqlValidator(Context context,
+  protected SqlValidator createSqlValidator(Context context,
       CalciteCatalogReader catalogReader) {
     final SqlOperatorTable opTab0 =
         context.config().fun(SqlOperatorTable.class,
@@ -852,7 +852,7 @@ public class CalcitePrepareImpl implements CalcitePrepare {
         conformance);
   }
 
-  private List<ColumnMetaData> getColumnMetaDataList(
+  protected List<ColumnMetaData> getColumnMetaDataList(
       JavaTypeFactory typeFactory, RelDataType x, RelDataType jdbcType,
       List<List<String>> originList) {
     final List<ColumnMetaData> columns = new ArrayList<>();
@@ -898,7 +898,7 @@ public class CalcitePrepareImpl implements CalcitePrepare {
         avaticaType.columnClassName());
   }
 
-  private ColumnMetaData.AvaticaType avaticaType(JavaTypeFactory typeFactory,
+  protected ColumnMetaData.AvaticaType avaticaType(JavaTypeFactory typeFactory,
       RelDataType type, RelDataType fieldType) {
     final String typeName = getTypeName(type);
     if (type.getComponentType() != null) {
@@ -938,21 +938,21 @@ public class CalcitePrepareImpl implements CalcitePrepare {
         : origins.get(origins.size() - 1 - offsetFromEnd);
   }
 
-  private int getTypeOrdinal(RelDataType type) {
+  protected int getTypeOrdinal(RelDataType type) {
     return type.getSqlTypeName().getJdbcOrdinal();
   }
 
-  private static String getClassName(RelDataType type) {
+  protected static String getClassName(RelDataType type) {
     return null;
   }
 
-  private static int getScale(RelDataType type) {
+  protected static int getScale(RelDataType type) {
     return type.getScale() == RelDataType.SCALE_NOT_SPECIFIED
         ? 0
         : type.getScale();
   }
 
-  private static int getPrecision(RelDataType type) {
+  protected static int getPrecision(RelDataType type) {
     return type.getPrecision() == RelDataType.PRECISION_NOT_SPECIFIED
         ? 0
         : type.getPrecision();
@@ -961,7 +961,7 @@ public class CalcitePrepareImpl implements CalcitePrepare {
   /** Returns the type name in string form. Does not include precision, scale
    * or whether nulls are allowed. Example: "DECIMAL" not "DECIMAL(7, 2)";
    * "INTEGER" not "JavaType(int)". */
-  private static String getTypeName(RelDataType type) {
+  protected static String getTypeName(RelDataType type) {
     final SqlTypeName sqlTypeName = type.getSqlTypeName();
     switch (sqlTypeName) {
     case ARRAY:
@@ -1010,7 +1010,7 @@ public class CalcitePrepareImpl implements CalcitePrepare {
     }
   }
 
-  private static RelDataType makeStruct(
+  protected static RelDataType makeStruct(
       RelDataTypeFactory typeFactory,
       RelDataType type) {
     if (type.isStruct()) {
@@ -1045,7 +1045,7 @@ public class CalcitePrepareImpl implements CalcitePrepare {
   }
 
   /** Holds state for the process of preparing a SQL statement. */
-  static class CalcitePreparingStmt extends Prepare
+  protected static class CalcitePreparingStmt extends Prepare
       implements RelOptTable.ViewExpander {
     protected final RelOptPlanner planner;
     protected final RexBuilder rexBuilder;
@@ -1053,13 +1053,13 @@ public class CalcitePrepareImpl implements CalcitePrepare {
     protected final CalciteSchema schema;
     protected final RelDataTypeFactory typeFactory;
     protected final SqlRexConvertletTable convertletTable;
-    private final EnumerableRel.Prefer prefer;
-    private final Map<String, Object> internalParameters =
+    protected final EnumerableRel.Prefer prefer;
+    protected final Map<String, Object> internalParameters =
         new LinkedHashMap<>();
     private int expansionDepth;
     private SqlValidator sqlValidator;
 
-    CalcitePreparingStmt(CalcitePrepareImpl prepare,
+    protected CalcitePreparingStmt(CalcitePrepareImpl prepare,
         Context context,
         CatalogReader catalogReader,
         RelDataTypeFactory typeFactory,
@@ -1291,7 +1291,7 @@ public class CalcitePrepareImpl implements CalcitePrepare {
   }
 
   /** An {@code EXPLAIN} statement, prepared and ready to execute. */
-  private static class CalcitePreparedExplain extends Prepare.PreparedExplain {
+  protected static class CalcitePreparedExplain extends Prepare.PreparedExplain {
     CalcitePreparedExplain(
         RelDataType resultType,
         RelDataType parameterRowType,

@@ -41,7 +41,7 @@ import java.util.Set;
  * Concrete implementation of {@link CalciteSchema} that caches tables,
  * functions and sub-schemas.
  */
-class CachingCalciteSchema extends CalciteSchema {
+public class CachingCalciteSchema extends CalciteSchema {
   private final Cached<SubSchemaCache> implicitSubSchemaCache;
   private final Cached<NameSet> implicitTableCache;
   private final Cached<NameSet> implicitFunctionCache;
